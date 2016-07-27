@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - IMOP - VL_IMARRAY</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - IMOP - VL_IMARRAY
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_DWAFFINE.html">Prev</a></li><li><a href="VL_IMARRAYSC.html">Next</a></li></ul><div class="documentation"><p>
+J=<a href="VL_IMARRAY.html">VL_IMARRAY</a>(A) creates a mosaic J from the array of images A. A
+can be either a M*N*K array, storing one gray-scale image per
+slice, or a M*N*3*K or M*N*K*3 array, storing a true color RGB
+image per slice. The function returns an image J which is a tiling
+of the images in the array. Tiles are filled from left to right
+and top to bottom.
+</p><p>
+<a href="VL_IMARRAY.html">VL_IMARRAY</a>(...) displays the image J rather than returning it.
+</p><p>
+<a href="VL_IMARRAY.html">VL_IMARRAY</a>() accepts the following options:
+</p><dl><dt>
+Spacing
+<span class="defaults">0</span></dt><dd><p>
+Separate the images by a border of the specified width (the
+border is assigned 0 value, which usually corresponds to black).
+</p></dd><dt>
+Layout
+<span class="defaults">empty</span></dt><dd><p>
+Specify a vector [TM TN] with the number of rows and columns of
+the tiling. If equal to [] the layout is computed automatically.
+</p></dd><dt>
+Movie
+<span class="defaults">false</span></dt><dd><p>
+Display or return a movie instead of generating a tiling.
+</p></dd><dt>
+CMap
+<span class="defaults">[]</span></dt><dd><p>
+Specify a colormap to construct a movie when the input is an
+indexed image array. If not specified, MATLAB default colormap
+is used.
+</p></dd><dt>
+Reverse
+<span class="defaults">true</span></dt><dd><p>
+Start filling the mosaic tiles from the bottom rather than from
+the top.
+</p></dd></dl><p>
+See also:<a href="VL_IMARRAYSC.html">VL_IMARRAYSC</a>(), <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

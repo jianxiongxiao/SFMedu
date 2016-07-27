@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - PLOTOP - VL_PLOTSTYLE</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - PLOTOP - VL_PLOTSTYLE
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_PLOTPOINT.html">Prev</a></li><li><a href="VL_PR.html">Next</a></li></ul><div class="documentation"><p>
+STYLES = VL_PLOTSYLE(INDEX) returns a cell array of PLOT() options
+for the color/line style of index INDEX. The available styles are
+defined the ColorOrder and LineStyleOrder properties of the
+current axes and cycled first by color and then by line style.
+</p><p>
+If there is no current axes can be found, then <a href="VL_PLOTSTYLE.html">VL_PLOTSTYLE</a>() uses
+the DefaultAxesColorOrder and DefaultLineStyleOrder root
+properties.
+</p><p>
+If INDEXES has more than one element, then <a href="VL_PLOTSTYLE.html">VL_PLOTSTYLE</a>(INDEXES)
+returns a cell array of styles of the same size of INDEXES.
+</p><dl><dt>
+Example
+</dt><dd><p>
+The code fragment
+</p><pre>
+   set(gca,'LineStyleOrder', {'-','-.'}, 'NextPlot', 'replacechildren') ;
+   plot([1 2], [1:20 ; 1:20]') ;
+</pre><p>
+and
+</p><pre>
+  set(gca,'NextPlot', 'replacechildren') ;
+  set(gca,'LineStyleOrder', {'-','-.'}) ;
+  for i = 1:20
+    style = vl_plotstyle(i) ;
+    plot([1 2], [i i], style{:}) ;
+    hold on ;
+  end
+</pre><p>
+produce visually similar results.
+</p></dd></dl></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

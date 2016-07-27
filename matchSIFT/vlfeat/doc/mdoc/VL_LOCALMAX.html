@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - MISC - VL_LOCALMAX</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - MISC - VL_LOCALMAX
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_LBPFLIPLR.html">Prev</a></li><li><a href="VL_NUMDER.html">Next</a></li></ul><div class="documentation"><p>
+SEL=<a href="VL_LOCALMAX.html">VL_LOCALMAX</a>(F) returns the indexes of the local maximizers of
+the Q-dimensional array F.
+</p><p>
+A local maximizer is an array element whose value is larger than
+the value of all its neighbors.  The neighbors of an element
+i1...iQ have subscripts j1...jQ such that iq-1 &lt;= jq &lt;= iq
+(excluding i1...iQ itself).  For example, if Q=1 the neighbors of
+an element are its predecessor and successor in the linear order;
+if Q=2, its neighbors are the elements immediately to its north,
+south, west, est, north-west, north-est, south-west and south-est
+(8-neighborhood).
+</p><p>
+Points on the boundary of F are ignored (and never selected as
+local maximizers).
+</p><p>
+SEL=<a href="VL_LOCALMAX.html">VL_LOCALMAX</a>(F,THRESH) accepts an element as a mazimizer only
+if it is not smaller than THRESH.
+</p><p>
+SEL=<a href="VL_LOCALMAX.html">VL_LOCALMAX</a>(F,THRESH,P) looks for neighbors only in the first
+P dimensions of the Q-dimensional array F. This allows to process
+F in ``slices''.
+</p><dl><dt>
+Remark
+</dt><dd><p>
+Matrices (2-array) with a singleton dimension are
+interpreted as vectors (1-array). So for example <a href="VL_LOCALMAX.html">VL_LOCALMAX</a>([0 1
+0]) and <a href="VL_LOCALMAX.html">VL_LOCALMAX</a>([0 1 0]') both return 2 as an aswer. However,
+if [0 1 0] is to be interpreted as a 1x2 matrix, then the
+correct answer is the empty set, as all elements are on the
+boundary. Unfortunately MATLAB does not distinguish between
+vectors and 2-matrices with a singleton dimension.  To forece
+the interpretation of all matrices as 2-arrays, use
+<a href="VL_LOCALMAX.html">VL_LOCALMAX</a>(F,TRESH,2) (but note that in this case the result is
+always empty!).
+</p></dd></dl><p>
+See also: <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

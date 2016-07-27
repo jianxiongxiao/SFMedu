@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - SIFT - VL_PHOW</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - SIFT - VL_PHOW
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_DSIFT.html">Prev</a></li><li><a href="VL_PLOTSIFTDESCRIPTOR.html">Next</a></li></ul><div class="documentation"><p>
+[FRAMES, DESCRS] = <a href="VL_PHOW.html">VL_PHOW</a>(IM) extracts PHOW features from the
+image IM. This function is a wrapper around <a href="VL_DSIFT.html">VL_DSIFT</a>() and
+<a href="VL_IMSMOOTH.html">VL_IMSMOOTH</a>().
+</p><p>
+The PHOW descriptors where introduced in [1]. By default,
+<a href="VL_PHOW.html">VL_PHOW</a>() computes the gray-scale variant of the descriptor.  The
+COLOR option can be used to compute the color variant instead.
+</p><dl><dt>
+Verbose
+<span class="defaults">[false]</span></dt><dd><p>
+Set to true to turn on verbose output.
+</p></dd><dt>
+Sizes
+<span class="defaults">[[4 6 8 10]]</span></dt><dd><p>
+Scales at which the dense SIFT features are extracted. Each
+value is used as bin size for the <a href="VL_DSIFT.html">VL_DSIFT</a>() function.
+</p></dd><dt>
+Fast
+<span class="defaults">[true]</span></dt><dd><p>
+Set to false to turn off the fast SIFT features computation by
+<a href="VL_DSIFT.html">VL_DSIFT</a>().
+</p></dd><dt>
+Step
+<span class="defaults">[2]</span></dt><dd><p>
+Step (in pixels) of the grid at which the dense SIFT features
+are extracted.
+</p></dd><dt>
+Color
+<span class="defaults">[GRAY]</span></dt><dd><p>
+Choose between GRAY (PHOW-gray), RGB, HSV, and OPPONENT
+(PHOW-color).
+</p></dd><dt>
+ContrastThreshold
+<span class="defaults">[0.005]</span></dt><dd><p>
+Contrast threshold below which SIFT features are mapped to
+zero. The input image is scaled to have intensity range in [0,1]
+(rather than [0,255]) and this value is compared to the
+descriptor norm as returned by <a href="VL_DSIFT.html">VL_DSIFT</a>().
+</p></dd><dt>
+WindowSize
+<span class="defaults">[1.5]</span></dt><dd><p>
+Size of the Gaussian window in units of spatial bins.
+</p></dd><dt>
+Magnif
+<span class="defaults">[6]</span></dt><dd><p>
+The image is smoothed by a Gaussian kernel of standard deviation
+SIZE / MAGNIF.
+</p></dd><dt>
+FloatDescriptors
+<span class="defaults">[false]</span></dt><dd><p>
+If set to TRUE, the descriptors are returned in floating point
+format.
+</p></dd></dl><p>
+See also: <a href="VL_DSIFT.html">VL_DSIFT</a>(), <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - Distance transf.</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - Distance transf.
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html" class='active' >Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+      
+
+<p>The distance transform of an image <code>image</code> is defined
+  as</p>
+<pre xml:space="preserve">
+  dt(u,v) = min  image(u',v') + alpha (u'-u-u0)^2 + beta (v'-v'-v0)^2
+            u'v'
+</pre>
+<p>The most common use of the image distance transform is to propagate
+the response of a feature detector to nearby image locations. This is
+used, for example, in the implementation of certain deformable part
+models or the computation of the Chamfer distance. In this tutorial,
+the image distance transform is used to compute the distance of each
+image pixel to the nearest element in an edge map, obtained from the
+Canny's edge detector. The code of this tutorial is located in the
+VLFeat folder in <code>toolbox/demo/vl_demo_imdisttf.m</code>.</p>
+
+<p><b>VLFeat</b> implements the fast distance transform algorithm of
+Felzenszwalb and Huttelnocher <a shape="rect" href="#ref1">[1]</a>, which has a
+linear time complexity in the number of image pixels.</p>
+
+<p>Consider the edge map extracted by the MATLAB built-in Canny edge
+detector on one of VLFeat test images:</p>
+<div class="highlight"><pre><span class="n">im</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">fullfile</span><span class="p">(</span><span class="n">vl_root</span><span class="p">,</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="s">&#39;a.jpg&#39;</span><span class="p">))</span> <span class="p">;</span>
+<span class="n">im</span> <span class="p">=</span> <span class="n">im</span><span class="p">(</span>1<span class="p">:</span>100<span class="p">,</span>1<span class="p">:</span>100<span class="p">,:)</span> <span class="p">;</span>
+<span class="n">imSize</span> <span class="p">=</span> <span class="p">[</span><span class="nb">size</span><span class="p">(</span><span class="n">im</span><span class="p">,</span>1<span class="p">)</span> <span class="nb">size</span><span class="p">(</span><span class="n">im</span><span class="p">,</span>2<span class="p">)]</span> <span class="p">;</span>
+<span class="n">edges</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">imSize</span><span class="p">)</span> <span class="o">+</span> <span class="nb">inf</span><span class="p">;</span>
+<span class="n">edges</span><span class="p">(</span><span class="n">edge</span><span class="p">(</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="s">&#39;canny&#39;</span><span class="p">))</span> <span class="p">=</span> 0 <span class="p">;</span>
+</pre></div>
+
+
+<div class="figure">
+ <img src="../demo/imdisttf_src.jpg"></img>
+ <img src="../demo/imdisttf_edge.jpg"></img>
+ <div class="caption">
+  <span class="content">
+   <b>Left:</b> A detail of the source image. <b>Right:</b> Extracted
+   Canny edges. Figure generated by <code>vl_demo_imdisttf</code>.
+  </span>
+ </div>
+</div>
+
+<p>The edge map is preprocessed to assign value <code>-inf</code> to
+the pixels that do not contain an edge element and <code>o</code> to
+the pixels that do. In this way, the distance transform of the image
+has for each pixel the distance to the nearest edge element, provided
+that one chooses <code>alpha=beta=1</code> and <code>v0=u0=0</code> in
+the definition. Since these are the default values for VLFeat
+implementations, the result an be computed by</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">distanceTransform</span><span class="p">,</span> <span class="n">neighbors</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_imdisttf</span><span class="p">(</span><span class="n">single</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>The matrix <code>neighbors</code> contains for each
+pixel <code>(u,v)</code> the index of the pixel <code>(u',v')</code>
+where the maximum is attained in the definition of the distance
+transform. This allows to associate to know for each pixel which is
+the nearest edge element, not just its distance, as exemplified by the
+following figure:</p>
+
+<div class="figure">
+ <img src="../demo/imdisttf_dist.jpg"></img>
+ <img src="../demo/imdisttf_neigh.jpg"></img>
+ <div class="caption">
+  <span class="content">
+   The distance <code>sqrt(distanceTransform)</code> to the closest
+   edge element (left) and arrows connecting pixels to their closest
+   edge element (right). Figure generated
+   by <code>vl_demo_imdisttf</code>.
+  </span>
+ </div>
+</div>
+
+
+<h1>References</h1>
+<ul>
+  <li><p id="ref1">[1] P. F. Felzenszwalb and
+      D. P. Huttenlocher. Distance transforms of sampled
+      functions. Technical report, Cornell University, 2004.</p></li>
+</ul>
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

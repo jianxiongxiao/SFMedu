@@ -1,0 +1,57 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:sift.vl_dsift;'>Prev</a></li><li><a href='%pathto:sift.vl_plotsiftdescriptor;'>Next</a></li></ul><div class="documentation"><p>
+[FRAMES, DESCRS] = <a href="%pathto:sift.vl_phow;">VL_PHOW</a>(IM) extracts PHOW features from the
+image IM. This function is a wrapper around <a href="%pathto:sift.vl_dsift;">VL_DSIFT</a>() and
+<a href="%pathto:imop.vl_imsmooth;">VL_IMSMOOTH</a>().
+</p><p>
+The PHOW descriptors where introduced in [1]. By default,
+<a href="%pathto:sift.vl_phow;">VL_PHOW</a>() computes the gray-scale variant of the descriptor.  The
+COLOR option can be used to compute the color variant instead.
+</p><dl><dt>
+Verbose
+<span class="defaults">[false]</span></dt><dd><p>
+Set to true to turn on verbose output.
+</p></dd><dt>
+Sizes
+<span class="defaults">[[4 6 8 10]]</span></dt><dd><p>
+Scales at which the dense SIFT features are extracted. Each
+value is used as bin size for the <a href="%pathto:sift.vl_dsift;">VL_DSIFT</a>() function.
+</p></dd><dt>
+Fast
+<span class="defaults">[true]</span></dt><dd><p>
+Set to false to turn off the fast SIFT features computation by
+<a href="%pathto:sift.vl_dsift;">VL_DSIFT</a>().
+</p></dd><dt>
+Step
+<span class="defaults">[2]</span></dt><dd><p>
+Step (in pixels) of the grid at which the dense SIFT features
+are extracted.
+</p></dd><dt>
+Color
+<span class="defaults">[GRAY]</span></dt><dd><p>
+Choose between GRAY (PHOW-gray), RGB, HSV, and OPPONENT
+(PHOW-color).
+</p></dd><dt>
+ContrastThreshold
+<span class="defaults">[0.005]</span></dt><dd><p>
+Contrast threshold below which SIFT features are mapped to
+zero. The input image is scaled to have intensity range in [0,1]
+(rather than [0,255]) and this value is compared to the
+descriptor norm as returned by <a href="%pathto:sift.vl_dsift;">VL_DSIFT</a>().
+</p></dd><dt>
+WindowSize
+<span class="defaults">[1.5]</span></dt><dd><p>
+Size of the Gaussian window in units of spatial bins.
+</p></dd><dt>
+Magnif
+<span class="defaults">[6]</span></dt><dd><p>
+The image is smoothed by a Gaussian kernel of standard deviation
+SIZE / MAGNIF.
+</p></dd><dt>
+FloatDescriptors
+<span class="defaults">[false]</span></dt><dd><p>
+If set to TRUE, the descriptors are returned in floating point
+format.
+</p></dd></dl><p>
+See also: <a href="%pathto:sift.vl_dsift;">VL_DSIFT</a>(), <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

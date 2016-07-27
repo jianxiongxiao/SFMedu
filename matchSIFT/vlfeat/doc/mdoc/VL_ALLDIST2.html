@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - MISC - VL_ALLDIST2</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - MISC - VL_ALLDIST2
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_KMEANS.html">Prev</a></li><li><a href="VL_ALPHANUM.html">Next</a></li></ul><div class="documentation"><p>
+D = <a href="VL_ALLDIST2.html">VL_ALLDIST2</a>(X,Y) returns the pairwise distance matrix D of the
+columns of S1 and S2, yielding
+</p><pre>
+  D(i,j) = sum (X(:,i) - Y(:,j)).^2
+</pre><p>
+<a href="VL_ALLDIST2.html">VL_ALLDIST2</a>(X) returns the pairwise distance matrix fo the columns of
+S, yielding
+</p><pre>
+  D(i,j) = sum (X(:,i) - X(:,j)).^2
+</pre><p>
+<a href="VL_ALLDIST2.html">VL_ALLDIST2</a>(...,'METRIC') changes the computed distance. Supported
+values for METRIC are
+</p><pre>
+ METRIC  D(i,j)
+ --------------------------------------------------------
+  LINF   max |X  - Y|
+  L2     sum (X  - Y).^2
+  L1     sum |X  - Y|
+  L0     sum (X ~= Y)
+  CHI2   sum (X  - Y).^2 ./ (X + Y)
+  HELL   sum (X^.5 - Y^.5) .^ 2
+</pre><p>
+(Notice that the standard definition of chi2 is half of what is
+computed here).
+</p><p>
+<a href="VL_ALLDIST2.html">VL_ALLDIST2</a>(...,'KERNEL') computes the following 'kernels' K:
+</p><pre>
+ KERNEL  K(i,j)
+ ---------------------------------------------------------
+  KL2    sum X .* Y
+  KL1    sum min (X, Y)
+  KCHI2  2 * sum (X .* Y) ./ (X + Y)
+  KHELL  (X .* Y) .^ 0.5
+</pre><p>
+The constant are chosen so that D(i,j) = K(i,i) + K(j,j) - 2 K(i,j)
+where D is the metric corresponding to the kenrel (if the arguments
+are non-negative vectors). Each kernel can be interpreted as the
+inner product inducing the corresponding metric in an embedding of
+the real space into an approrpiate reproducing Kenrel Hilbert
+space.
+</p><p>
+<a href="VL_ALLDIST2.html">VL_ALLDIST2</a>() supports several storage classes. X and Y must have the
+same storage class. The sotrage class of D is promoted to reduce
+the chance of overvlow, but this is not checked.
+</p><pre>
+  X &amp; Y class      D class
+ ---------------------------
+  UINT8            UINT32
+   INT8             INT32
+  UINT16           UINT32
+   INT16            INT32
+  UINT32           UINT32
+   INT32            INT32
+  SINGLE           SINGLE
+  DOUBLE           DOUBLE
+</pre><p>
+Warning: Both chi2 and kchi2 use integer math when presented with
+integer data types. This can easily result in zeros where you did
+not expect them.
+</p><p>
+See also: <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

@@ -1,0 +1,33 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:plotop.vl_pr;'>Prev</a></li><li><a href='%pathto:plotop.vl_roc;'>Next</a></li></ul><div class="documentation"><p>
+<a href="%pathto:plotop.vl_printsize;">VL_PRINTSIZE</a>(R) sets the PaperPosition property of the current
+figure so that the width of the figure is the fraction R of a
+'uslsetter' page. It also sets the PaperSize property to tightly
+match the figure size. In this way, printing to any format crops
+the figure similar to what printing to EPS would do.
+</p><p>
+<a href="%pathto:plotop.vl_printsize;">VL_PRINTSIZE</a>(FIG,R) opearates on the specified figure FIG.
+</p><p>
+This command is useful to resize a figure before printing it so
+that elements are scaled appropriately to match the desired figure
+size in print. The function accepts the following optional
+arguments:
+</p><dl><dt>
+Aspect
+<span class="defaults">[none]</span></dt><dd><p>
+Change the figure aspect ratio (widht/height) to the specified
+value.
+</p></dd><dt>
+Reference
+<span class="defaults">[vertical]</span></dt><dd><p>
+If set to 'horizontal' the ratio R is the widht of the figure
+over the width of the page. If 'vertical', the ratio R is the
+height of the figure over the height of the page.
+</p></dd><dt>
+PaperType
+<span class="defaults">[letter]</span></dt><dd><p>
+Set the type (size) of the reference paperReference. Any of the
+paper types supported by MATLAB can be used (see PRINT())).
+</p></dd></dl><p>
+See also: <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

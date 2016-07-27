@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - KMEANS - VL_KMEANS</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - KMEANS - VL_KMEANS
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_IKMEANSPUSH.html">Prev</a></li><li><a href="VL_ALLDIST2.html">Next</a></li></ul><div class="documentation"><p>
+[C, A] = <a href="VL_KMEANS.html">VL_KMEANS</a>(X, NUMCENTERS) clusters the columns of the
+matrix X in NUMCENTERS centers C using k-means. X may be either
+SINGLE or DOUBLE. C has the same number of rows of X and NUMCENTER
+columns, with one column per center. A is a UINT32 row vector
+specifying the assignments of the data X to the NUMCENTER
+centers.
+</p><p>
+[C, A, ENERGY] = <a href="VL_KMEANS.html">VL_KMEANS</a>(...) returns the energy of the solution
+(or an upper bound for the ELKAN algorithm) as well.
+</p><p>
+KMEANS() supports different initialization and optimization
+methods and different clustering distances. Specifically, the
+following options are supported:
+</p><dl><dt>
+Verbose
+</dt><dd><p>
+Increase the verbosity level (may be specified multiple times).
+</p></dd><dt>
+Distance
+<span class="defaults">[L2]</span></dt><dd><p>
+Use either L1 or L2 distance.
+</p></dd><dt>
+Initialization
+</dt><dd><p>
+Use either random data points (RANDSEL) or k-means++ (PLUSPLUS)
+to initialize the centers.
+</p></dd><dt>
+Algorithm
+<span class="defaults">[LLOYD]</span></dt><dd><p>
+Use either the standard LLOYD or the accelerated
+ELKAN algorithm for optimization.
+</p></dd><dt>
+NumRepetitions
+<span class="defaults">[1]</span></dt><dd><p>
+Number of time to restart k-means. The solution with minimal
+energy is returned.
+</p></dd><dt>
+Example
+</dt><dd><p>
+<a href="VL_KMEANS.html">VL_KMEANS</a>(X, 10, 'verbose', 'distance', 'l1', 'algorithm',
+'elkan') clusters the data point X using 10 centers, l1
+distance, and the Elkan's algorithm.
+</p></dd></dl><p>
+See also: <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

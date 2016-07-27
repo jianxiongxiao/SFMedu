@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html" class='active' >Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    
+   
+
+<p>This section features a number of tutorials illustrating some of
+the main algorithms implemented in <b>VLFeat</b>. The tutorials can be
+roughly grouped into two categories. The first class of algorithms
+detect and describe image regions
+(<a shape="rect" href="tut.html#tut.features"><em>features</em></a>). The second
+class of algorithms
+<a shape="rect" href="tut.html#tut.clustering"><em>cluster</em></a> data.
+
+<h1 id="tut.features">Features</h1>
+
+<ul>
+  <li><p><a shape="rect" href="sift.html">Scale Invariant Feature Transform
+  (SIFT)</a>. Getting started with this popular feature detector /
+  descriptor.</p></li>
+  <li><p><a shape="rect" href="dsift.html">Dense SIFT (DSIFT) and
+  PHOW</a>. A state-of-the-art descriptor for image
+  categorization.</p></li>
+  <li><p><a shape="rect" href="mser.html">Maximally Stable Extremal Regions
+  (MSER)</a>. Extracting MSERs from an image.</p></li>
+  <li><p><a shape="rect" href="imdisttf.html">Image distance transform.</a>
+  Compute the image distance transform for fast part models and edge
+  matching.</p></li>
+</ul>
+
+<h1 id="tut.clustering">Clustering</h1>
+
+<ul>
+  <li><p><a shape="rect" href="ikm.html">Integer optimized <em>k</em>-means
+  (IKM)</a>. A quick overview of VLFeat fast <em>k</em>-means
+  implementation.</p></li>
+  <li><p><a shape="rect" href="hikm.html">Hierarchical <em>k</em>-means
+  (HIKM)</a>. Create a fast <em>k</em>-means tree for integer
+  data.</p></li>
+  <li><p><a shape="rect" href="aib.html">Agglomerative Information Bottleneck
+  (AIB)</a>. Cluster discrete data based on the mutual information
+  between the data and class labels.</p></li>
+  <li><p><a shape="rect" href="quickshift.html">Quick shift</a>.  An introduction
+  which shows how to create superpixels using this quick mode seeking
+  method.</p></li>
+  <li><p><a shape="rect" href="slic.html">SLIC</a>. An introduction to SLIC
+  supoerpixels.</p></li>
+</ul>
+
+<h1>Other</h1>
+
+<ul>
+  <li><p><a shape="rect" href="kdtree.html">Forests of kd-trees</a>.
+  Approximate nearest neighbor queries in high dimensions using an
+  optimized forest of kd-trees.</p></li>
+  <li><p><a shape="rect" href="utils.html">MATLAB Utilities</a>. A list of
+  useful MATLAB functions bundled with VLFeat.</p></li>
+</ul>
+
+</p>
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - SIFT - VL_UBCMATCH</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - SIFT - VL_UBCMATCH
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_SIFTDESCRIPTOR.html">Prev</a></li><li><a href="VL_UBCREAD.html">Next</a></li></ul><div class="documentation"><p>
+MATCHES = <a href="VL_UBCMATCH.html">VL_UBCMATCH</a>(DESCR1, DESCR2) matches the two sets of SIFT
+descriptors DESCR1 and DESCR2.
+</p><p>
+[MATCHES,SCORES] = <a href="VL_UBCMATCH.html">VL_UBCMATCH</a>(DESCR1, DESCR2) retuns the matches and
+also the squared Euclidean distance between the matches.
+</p><p>
+The function uses the algorithm suggested by D. Lowe [1] to reject
+matches that are too ambiguous.
+</p><p>
+<a href="VL_UBCMATCH.html">VL_UBCMATCH</a>(DESCR1, DESCR2, THRESH) uses the specified threshold
+THRESH. A descriptor D1 is matched to a descriptor D2 only if the
+distance d(D1,D2) multiplied by THRESH is not greater than the
+distance of D1 to all other descriptors. The default value of
+THRESH is 1.5.
+</p><p>
+The storage class of the descriptors can be either DOUBLE, FLOAT,
+INT8 or UINT8. Usually integer classes are faster.
+</p><dl><dt>
+REFERENCES
+</dt><dd><p>
+[1] D. G. Lowe, Distinctive image features from scale-invariant
+keypoints. IJCV, vol. 2, no. 60, pp. 91-110, 2004.
+</p></dd></dl><p>
+See also: <a href="VL_HELP.html">VL_HELP</a>(), <a href="VL_SIFT.html">VL_SIFT</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - IKM</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - IKM
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html" class='active' >IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+      
+
+<p><b>VLFeat</b> includes a basic implementation of k-means clustering
+and hierarchical k-means clustering. They are designed to be
+lightweight in order to work on large datasets. In particular, they
+assume that the data are vectors of unsigned chars (one byte). While
+this is limiting for some application, it works well for clustering
+image descriptors, where very high precision is usually unnecessary.
+For more details, see the 
+<a shape="rect" href="../api/ikmeans_8h.html">Integer k-means API
+  reference</a>.</p>
+
+
+<ul>
+  <li><a shape="rect" href="ikm.html#tut.ikm.usage">Usage</a></li>
+  <li><a shape="rect" href="ikm.html#tut.ikm.elkan">Elkan</a></li>
+</ul>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.ikm.usage">Usage</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>Integer k-means (IKM) is run by the command
+<code>vl_ikmeans</code>. In order to demonstrate the usage of this
+command, we sample 1000 random points in the <code>[0,255]^2</code>
+integer square and use <code>vl_ikmeans</code> to get k=3
+clusters:</p>
+
+<div class="highlight"><pre><span class="n">K</span> <span class="p">=</span> 3 <span class="p">;</span>
+<span class="n">data</span> <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span>2<span class="p">,</span>1000<span class="p">)</span> <span class="o">*</span> 255<span class="p">)</span> <span class="p">;</span>
+<span class="p">[</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_ikmeans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">K</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>The program returns both the cluster centers <code>C</code> and the
+data-to-cluster assignments <code>A</code>. By means of the cluster
+centers
+<code>C</code> we can project more data on the same clusters</p>
+
+<div class="highlight"><pre><span class="n">datat</span> <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span>2<span class="p">,</span>10000<span class="p">)</span> <span class="o">*</span> 255<span class="p">)</span> <span class="p">;</span>
+<span class="n">AT</span> <span class="p">=</span> <span class="n">vl_ikmeanspush</span><span class="p">(</span><span class="n">datat</span><span class="p">,</span><span class="n">C</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>In order to visualize the results, we associate to each cluster a
+color and we plot the points:</p>
+
+<div class="highlight"><pre><span class="n">cl</span> <span class="p">=</span> <span class="n">get</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;ColorOrder&#39;</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">ncl</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">cl</span><span class="p">,</span>1<span class="p">)</span> <span class="p">;</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">=</span>1<span class="p">:</span><span class="n">K</span>
+  <span class="n">sel</span>  <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">A</span>  <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="p">;</span>
+  <span class="n">selt</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">AT</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="p">;</span>
+  <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">(</span>1<span class="p">,</span><span class="n">sel</span><span class="p">),</span>  <span class="n">data</span><span class="p">(</span>2<span class="p">,</span><span class="n">sel</span><span class="p">),</span>  <span class="s">&#39;.&#39;</span><span class="p">,...</span>
+       <span class="s">&#39;Color&#39;</span><span class="p">,</span><span class="n">cl</span><span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">ncl</span><span class="p">)</span><span class="o">+</span>1<span class="p">,:))</span> <span class="p">;</span>
+  <span class="n">plot</span><span class="p">(</span><span class="n">datat</span><span class="p">(</span>1<span class="p">,</span><span class="n">selt</span><span class="p">),</span><span class="n">datat</span><span class="p">(</span>2<span class="p">,</span><span class="n">selt</span><span class="p">),</span><span class="s">&#39;+&#39;</span><span class="p">,...</span>
+       <span class="s">&#39;Color&#39;</span><span class="p">,</span><span class="n">cl</span><span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">ncl</span><span class="p">)</span><span class="o">+</span>1<span class="p">,:))</span> <span class="p">;</span>  
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="figure">
+<image src="../demo/ikmeans_lloyd.jpg"></image>
+<div class="caption">
+<span class="content">
+<b>Integer k-means.</b> We show clusters of 2-D points obtained by
+integer k-means.  There are <code>k=3</code> clusters represented with
+different colors. The clusters have been estimated from 1000 points
+(displayed as dots). Then 10000 different points have been projected on
+the same clusters (displayed as crosses). The three big markers
+represent the cluster centers.
+</span>
+</div>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.ikm.elkan">Elkan</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>VLFeat supports two different implementations of k-means. While
+they produce identical output, the Elkan method requires fewer
+distance computations.  The <code>method</code> parameters controls
+which method is used. Consider the case when <code>K=100</code> and our
+data is now 128 dimensional (e.g. SIFT descriptors):</p>
+
+<div class="highlight"><pre><span class="n">K</span><span class="p">=</span>100<span class="p">;</span>
+<span class="n">data</span> <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span>128<span class="p">,</span>10000<span class="p">)</span> <span class="o">*</span> 255<span class="p">);</span>
+<span class="n">tic</span><span class="p">;</span>
+<span class="p">[</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_ikmeans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span> <span class="s">&#39;lloyd&#39;</span><span class="p">)</span> <span class="p">;</span> <span class="c">% default</span>
+<span class="n">t_lloyd</span> <span class="p">=</span> <span class="n">toc</span>
+<span class="n">tic</span><span class="p">;</span>
+<span class="p">[</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_ikmeans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span> <span class="s">&#39;elkan&#39;</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">t_elkan</span> <span class="p">=</span> <span class="n">toc</span>
+
+<span class="n">t_lloyd</span> <span class="p">=</span>
+
+   10<span class="p">.</span>2884
+
+<span class="n">t_elkan</span> <span class="p">=</span>
+
+    5<span class="p">.</span>1405
+</pre></div>
+
+
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

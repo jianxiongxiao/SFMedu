@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="web.css" type="text/css" rel="stylesheet"></link>
+  <link href="pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Download - C library install - g++</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Download - C library install - g++
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="index.html">Home</a>
+</li>
+<li><a href="download.html">Download</a>
+<ul>
+<li><a href="install-matlab.html">MATLAB install</a>
+</li>
+<li><a href="install-shell.html">Shell install</a>
+</li>
+<li><a href="install-c.html">C library install</a>
+<ul>
+<li><a href="xcode.html">Xcode</a>
+</li>
+<li><a href="vsexpress.html">Visual C++</a>
+</li>
+<li><a href="gcc.html" class='active' >g++</a>
+</li>
+</ul></li>
+<li><a href="compiling.html">Compiling</a>
+</li>
+</ul></li>
+<li><a href="doc.html">Documentation</a>
+</li>
+<li><a href="overview/tut.html">Tutorials</a>
+</li>
+<li><a href="applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    
+
+ <p>These instructions show how to setup a basic C++ project which uses the
+ <b>VLFeat</b> library and the g++ compiler. Our project will consist of the
+ following simple file, which we will refer to as <code>main.cpp</code>:
+ </p>
+
+<div class="highlight"><pre><span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
+<span class="cp">  #include &lt;vl/generic.h&gt;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">VL_PRINT</span> <span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)</span> <span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+ <p>Notice that the <code>extern &quot;C&quot;</code> is required for C++ projects.
+ Compiling the project is straightforward. From the command prompt type:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>g++ main.cpp -o vlfeat-test -IVLROOT -LVLROOT/bin/a64/ -lvl
+</pre></div>
+
+
+ <p>In this example, replace <code>VLROOT</code> with the path to your VLFeat
+ installation and replace <code>a64</code> with your architecture
+ (<code>a64</code> for 64 bit linux, <code>glx</code> for 32 bit linux).</p>
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

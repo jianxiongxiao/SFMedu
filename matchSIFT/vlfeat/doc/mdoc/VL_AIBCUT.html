@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - AIB - VL_AIBCUT</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - AIB - VL_AIBCUT
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_AIB.html">Prev</a></li><li><a href="VL_AIBCUTHIST.html">Next</a></li></ul><div class="documentation"><p>
+CUT = <a href="VL_AIBCUT.html">VL_AIBCUT</a>(PARENTS, N) cuts the binary merge tree PARENTS and
+returns a cut CUT of N nodes. The format of PARENTS is the same
+used by the <a href="VL_AIB.html">VL_AIB</a>() function.
+</p><p>
+A cut is a set of N nodes such that no node is a descendant of any
+other node in the CUT and such that any leaf descend from a node in
+the cut. CUT lists the nodes of the binary merge tree PARENT that
+form the cut.
+</p><p>
+Nodes with null parent (as defined by PARENTS) are comprised in the
+cut if the other nodes are not enough to fill a cut of N elements.
+</p><p>
+[CUT, MAP] = <a href="VL_AIBCUT.html">VL_AIBCUT</a>(...) returns a vector MAP with the same size as
+PARENTS. MAP assign each node below or in the cut to the
+corresponding element in the CUT vector (each element above the cut
+or with null parent is mapped to 0). To get the index of the
+corresponding cut nodes use CUT(MAP). MAP by itself is useful to
+quantize the leaves in a sequences of N contiguous indexes,
+starting from one (see also <a href="VL_AIBCUTPUSH.html">VL_AIBCUTPUSH</a>()).
+</p><p>
+[CUT, MAP, SHORT] = <a href="VL_AIBCUT.html">VL_AIBCUT</a>(...) returns also a vector SHORT that
+represents a merge tree compressed to the cut. This is obtained by
+mapping all nodes below to the cut element above them. Nodes in or
+above the cut are mapped to themselves. Null parents are left
+unchanged, except if the corresponding node is in the cut (in which
+case the map-to-itself rule has the precedence).
+</p><p>
+See also: <a href="VL_HELP.html">VL_HELP</a>(), <a href="VL_AIB.html">VL_AIB</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

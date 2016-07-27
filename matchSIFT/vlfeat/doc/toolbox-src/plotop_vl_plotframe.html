@@ -1,0 +1,40 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:plotop.vl_linespec2prop;'>Prev</a></li><li><a href='%pathto:plotop.vl_plotgrid;'>Next</a></li></ul><div class="documentation"><p>
+<a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>(FRAME) plots the frames FRAME.  Frames are attributed
+image regions (as, for example, extracted by a feature detector). A
+frame is a vector of D=2,3,..,6 real numbers, depending on its
+class. <a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>() supports the following classes:
+</p><pre>
+ * POINTS
+   + FRAME(1:2)   coordinates
+
+ * CIRCLES
+   + FRAME(1:2)   center
+   + FRAME(3)     radius
+
+ * ORIENTED CIRCLES
+   + FRAME(1:2)   center
+   + FRAME(3)     radius
+   + FRAME(4)     orientation
+
+ * ELLIPSES
+   + FRAME(1:2)   center
+   + FRAME(3:5)   S11, S12, S22 such that ELLIPSE = {x: x' inv(S) x = 1}.
+
+ * ORIENTED ELLIPSES
+   + FRAME(1:2)   center
+   + FRAME(3:6)   stacking of A such that ELLIPSE = {A x : |x| = 1}
+</pre><p>
+H=<a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>(...) returns the handle of the graphical object
+representing the frames.
+</p><p>
+<a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>(FRAMES) where FRAMES is a matrix whose column are FRAME
+vectors plots all frames simultaneously. Using this call is much
+faster than calling <a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>() for each frame.
+</p><p>
+<a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>(FRAMES,...) passes any extra argument to the underlying
+plot function. The first optional argument can be a line
+specification string such as the one used by PLOT().
+</p><p>
+See also: <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - MISC - VL_OVERRIDE</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - MISC - VL_OVERRIDE
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_NUMDER2.html">Prev</a></li><li><a href="VL_PEGASOS.html">Next</a></li></ul><div class="documentation"><p>
+CONFIG = <a href="VL_OVERRIDE.html">VL_OVERRIDE</a>(CONFIG, UPDATE) copies recursively the fileds
+of the structure UPDATE to the corresponding fields of the
+struture CONFIG.
+</p><p>
+Usually CONFIG is interpreted as a list of paramters with their
+default values and UPDATE as a list of new paramete values.
+</p><p>
+<a href="VL_OVERRIDE.html">VL_OVERRIDE</a>(..., 'Warn') prints a warning message whenever: (i)
+UPDATE has a field not found in CONFIG, or (ii) non-leaf values of
+CONFIG are overwritten.
+</p><p>
+<a href="VL_OVERRIDE.html">VL_OVERRIDE</a>(..., 'Skip') skips fields of UPDATE that are not found
+in CONFIG instead of copying them.
+</p><p>
+<a href="VL_OVERRIDE.html">VL_OVERRIDE</a>(..., 'CaseI') matches field names in a
+case-insensitive manner.
+</p><dl><dt>
+Remark
+</dt><dd><p>
+Fields are copied at the deepest possible level. For instance,
+if CONFIG has fields A.B.C1=1 and A.B.C2=2, and if UPDATE is the
+structure A.B.C1=3, then <a href="VL_OVERRIDE.html">VL_OVERRIDE</a>() returns a strucuture with
+fields A.B.C1=3, A.B.C2=2. By contrast, if UPDATE is the
+structure A.B=4, then the field A.B is copied, and <a href="VL_OVERRIDE.html">VL_OVERRIDE</a>()
+returns the structure A.B=4 (specifying 'Warn' would warn about
+the fact that the substructure B.C1, B.C2 is being deleted).
+</p></dd><dt>
+Remark
+</dt><dd><p>
+Two fields are matched if they correspond exactly. Specifically,
+two fileds A(IA).(FA) and B(IA).FB of two struct arrays A and B
+match if, and only if, (i) A and B have the same dimensions,
+(ii) IA == IB, and (iii) FA == FB.
+</p></dd></dl><p>
+See also: <a href="VL_ARGPARSE.html">VL_ARGPARSE</a>(), <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

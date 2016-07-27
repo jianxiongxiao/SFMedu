@@ -1,0 +1,89 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:plotop.vl_printsize;'>Prev</a></li><li><a href='%pathto:plotop.vl_tightsubplot;'>Next</a></li></ul><div class="documentation"><p>
+[TP,TN] = <a href="%pathto:plotop.vl_roc;">VL_ROC</a>(LABELS, SCORES) computes the receiver operating
+characteristic (ROC curve). LABELS are the ground thruth labels (+1
+or -1) and SCORE is the scores assigned to them by a classifier
+(higher scores correspond to positive labels).
+</p><p>
+[TP,TN] are the true positive and true negative rates for
+incereasing values of the decision threshold.
+</p><p>
+Set the zero the lables of samples to ignore in the evaluation.
+</p><p>
+Set to -INF the score of samples which are never retrieved. In
+this case the PR curve will have maximum recall &lt; 1.
+</p><p>
+[TP,TN,INFO] = <a href="%pathto:plotop.vl_roc;">VL_ROC</a>(...) returns the following additional
+information:
+</p><dl><dt>
+INFO.EER
+<span class="defaults">Equal error rate.</span></dt><dt>
+INFO.AUC
+<span class="defaults">Area under the VL_ROC (AUC).</span></dt><dt>
+INFO.UR
+<span class="defaults">Uniform prior best op point rate.</span></dt><dt>
+INFO.UT
+<span class="defaults">Uniform prior best op point threhsold.</span></dt><dt>
+INFO.NR
+<span class="defaults">Natural prior best op point rate.</span></dt><dt>
+INFO.NT
+<span class="defaults">Natural prior best op point threshold.</span></dt></dl><p>
+<a href="%pathto:plotop.vl_roc;">VL_ROC</a>(...) with no output arguments plots the VL_ROC diagram in
+the current axis.
+</p><dl><dt>
+About the ROC curve
+</dt><dd><p>
+Consider a classifier that predicts as positive all lables Y
+whose SCORE is not smaller than a threshold S. The ROC curve
+represents the performance of such classifier as the threshold S
+is changed. Define
+</p><pre>
+  P = num. of positive samples,
+  N = num. of negative samples,
+</pre><p>
+and for each threshold S
+</p><pre>
+  TP(S) = num. of samples that are correctly classified as positive,
+  TN(S) = num. of samples that are correctly classified as negative,
+  FP(S) = num. of samples that are incorrectly classified as positive,
+  FN(S) = num. of samples that are incorrectly classified as negative.
+</pre><p>
+Consider also the rates:
+</p><pre>
+  TPR = TP(S) / P,      FNR = FN(S) / P,
+  TNR = TN(S) / N,      FPR = FP(S) / N,
+</pre><p>
+and notice that by definition
+</p><pre>
+  P = TP(S) + FN(S) ,    N = TN(S) + FP(S),
+  1 = TPR(S) + FNR(S),   1 = TNR(S) + FPR(S).
+</pre><p>
+The ROC curve is the parametric curve (TPR(S), TNR(S)) obtained
+as the classifier threshold S is varied from -INF to +INF. The
+TPR is also known as recall (see <a href="%pathto:plotop.vl_pr;">VL_PR</a>()).
+</p><p>
+The ROC curve is contained in the square with vertices (0,0) The
+(average) ROC curve of a random classifier is a line which
+connects (1,0) and (0,1).
+</p><p>
+The ROC curve is independent of the prior probability of the
+labels (i.e. of P/(P+N) and N/(P+N)).
+</p><p>
+An OPERATING POINT is a point on the ROC curve corresponding to
+a certain threshold S. Each operating point corresponds to
+minimizing the empirical 01 error of the classifier for given
+prior probabilty of the labels. <a href="%pathto:plotop.vl_roc;">VL_ROC</a>() computes the following
+operating points:
+</p><pre>
+ Natural operating point
+ Uniform operating point
+</pre></dd></dl><pre>
+ VL_ROC() acccepts the following options:
+
+ Plot
+   Setting this option turns on plotting. Set to 'TrueNegative' or
+   'TN' to plot TP(S) (recall) vs. TN(S). Set to 'FalseNegative' or
+   'FN' to plot TP(S) (recall) vs. FP(S) = 1 - TN(S).
+</pre><p>
+See also: <a href="%pathto:plotop.vl_pr;">VL_PR</a>(), <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

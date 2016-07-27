@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - SLIC</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - SLIC
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html" class='active' >SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+     
+
+<p><b>SLIC</b> is superpixel extraction (segmentation) method based on
+a local version of k-means. For a detailed description of the
+algorithm, see the <a shape="rect" href="../api/slic.html">SLIC API
+reference</a>.</p>
+
+<p>This demo shows how to use SLIC to extract superpixels from this
+image:</p>
+
+<div class="figure">
+  <image src="../demo/slic_image.jpg"></image>
+  <div class="caption">The image to be segmented</div>
+</div>
+
+<p>In the simplest form, SLIC can be called as:</p>
+
+<div class="highlight"><pre><span class="c">% im contains the input RGB image as a SINGLE array</span>
+<span class="n">regionSize</span> <span class="p">=</span> 10 <span class="p">;</span>
+<span class="n">regularizer</span> <span class="p">=</span> 10 <span class="p">;</span>
+<span class="n">segments</span> <span class="p">=</span> <span class="n">vl_slic</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">regionSize</span><span class="p">,</span> <span class="n">regularizer</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>By making varting <code>regionSize</code> and
+<code>regularizer</code> one obtains the segmentations:</p>
+
+<div class="figure">
+<image src="../demo/slic_segmentation.jpg"></image>
+<div class="caption">SLIC segmentations <code>regionSize</code>
+spaning the values 10,30, and
+<code>regularizer</code> the values 0.01, 0.1, 1.</div>
+</div>
+
+<p>SLIC is often intended to be applied on top of LAB rather than RGB
+images. To do this, simpyl convert the image to LAB format before
+calling <code>vl_slic</code>.</p>
+
+<div class="highlight"><pre><span class="c">% IM contains the image in RGB format as before</span>
+<span class="n">imlab</span> <span class="p">=</span> <span class="n">vl_xyz2lab</span><span class="p">(</span><span class="n">vl_rgb2xyz</span><span class="p">(</span><span class="n">im</span><span class="p">))</span> <span class="p">;</span>
+<span class="n">segments</span> <span class="p">=</span> <span class="n">vl_slic</span><span class="p">(</span><span class="n">imlab</span><span class="p">,</span> 10<span class="p">,</span> 0<span class="p">.</span>1<span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

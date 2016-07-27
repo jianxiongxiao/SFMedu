@@ -1,0 +1,31 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:sift.vl_phow;'>Prev</a></li><li><a href='%pathto:sift.vl_sift;'>Next</a></li></ul><div class="documentation"><p>
+<a href="%pathto:sift.vl_plotsiftdescriptor;">VL_PLOTSIFTDESCRIPTOR</a>(D) plots the SIFT descriptors D, stored as
+columns of the matrix D. D has the same format used by <a href="%pathto:sift.vl_sift;">VL_SIFT</a>().
+</p><p>
+<a href="%pathto:sift.vl_plotsiftdescriptor;">VL_PLOTSIFTDESCRIPTOR</a>(D,F) plots the SIFT descriptors warped to
+the SIFT frames F, specified as columns of the matrix F. F has the
+same format used by <a href="%pathto:sift.vl_sift;">VL_SIFT</a>().
+</p><p>
+H=<a href="%pathto:sift.vl_plotsiftdescriptor;">VL_PLOTSIFTDESCRIPTOR</a>(...) returns the handle H to the line drawing
+representing the descriptors.
+</p><p>
+REMARK. By default, the function assumes descriptors with 4x4
+spatial bins and 8 orientation bins (Lowe's default.)
+</p><p>
+The function supports the following options
+</p><dl><dt>
+NumSpatialBins
+<span class="defaults">[4]</span></dt><dd><p>
+Number of spatial bins in each spatial direction.
+</p></dd><dt>
+NumOrientBins
+<span class="defaults">[8]</span></dt><dd><p>
+Number of orientation bis.
+</p></dd><dt>
+Magnif
+<span class="defaults">[3]</span></dt><dd><p>
+Magnification factor.
+</p></dd></dl><p>
+See also: <a href="%pathto:sift.vl_sift;">VL_SIFT</a>(), <a href="%pathto:plotop.vl_plotframe;">VL_PLOTFRAME</a>(), <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - HIKM</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - HIKM
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html" class='active' >HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+     
+
+<p><b>VLFeat</b> offers a hierarchical version of integer k-means, which
+recursively applies <code>vl_ikmeans</code> to compute finer and finer
+partitions. For more details see 
+<a shape="rect" href="../api/hikmeans_8h.html">Hierarchical Integer
+  k-means API reference</a> and the <a shape="rect" href="ikm.html">Integer
+  k-means tutorial</a>.
+</p> 
+
+<ul>
+  <li><a shape="rect" href="hikm.html#tut.hikm.usage">Usage</a></li>
+  <li><a shape="rect" href="hikm.html#tut.hikm.tree">Tree structure</a></li>
+  <li><a shape="rect" href="hikm.html#tut.hikm.elkan">Elkan</a></li>
+</ul>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.hikm.usage">Usage</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>First, we generate some random data to cluster in <code>[0,255]^2</code>:</p>
+
+<div class="highlight"><pre><span class="n">data</span>     <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span>2<span class="p">,</span>10000<span class="p">)</span> <span class="o">*</span> 255<span class="p">)</span> <span class="p">;</span>
+<span class="n">datat</span>    <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span>2<span class="p">,</span>100000<span class="p">)</span><span class="o">*</span> 255<span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>To cluster this data, we simply use <code>vl_hikmeans</code>:</p>
+
+<div class="highlight"><pre><span class="n">K</span>        <span class="p">=</span> 3 <span class="p">;</span>
+<span class="n">nleaves</span>  <span class="p">=</span> 100 <span class="p">;</span>
+<span class="p">[</span><span class="n">tree</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_hikmeans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">nleaves</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>Here <code>nleaves</code> is the desired number of leaf
+clusters. The algorithm terminates when there are at least
+<code>nleaves</code> nodes, creating a tree with <code>depth =
+  floor(log(K nleaves))</code></p>
+
+<p>To assign labels to the new data, we use <code>vl_hikmeanspush</code>:</p>
+
+<div class="highlight"><pre><span class="n">AT</span>       <span class="p">=</span> <span class="n">vl_hikmeanspush</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">datat</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<div class="figure">
+<image src="../demo/hikmeans-tree.jpg"></image>
+<image src="../demo/hikmeans-clusters.jpg"></image>
+<div class="caption">
+<span class="content">
+<b>Hierarchical integer K-means.</b>  Left: A depiction of the
+recursive clusters. Each node is a cluster center. The root note is
+not depicted (its center would be the mean of the dataset).  Right:
+Clusters are represented as different colors (here are more than 100
+clusters, but only three colors are used).
+</span>
+</div>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.hikm.tree">Tree structure</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>The output <code>tree</code> is a MATLAB structure representing the tree of
+clusters:</p>
+
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="n">tree</span>
+<span class="n">tree</span> <span class="p">=</span>
+ 
+          <span class="n">K</span><span class="p">:</span> 3
+      <span class="n">depth</span><span class="p">:</span> 5
+    <span class="n">centers</span><span class="p">:</span> <span class="p">[</span>2<span class="n">x3</span> <span class="n">int32</span><span class="p">]</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="p">[</span>1<span class="n">x3</span> <span class="n">struct</span><span class="p">]</span>
+</pre></div>
+
+
+<p>The field <code>centers</code> is the matrix of the cluster centers at the
+root node.  If the depth of the tree is larger than 1, then the field
+<code>sub</code> is a structure array with one entry for each cluster. Each
+element is in turn a tree:</p>
+
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="n">tree</span><span class="p">.</span><span class="n">sub</span>
+<span class="nb">ans</span> <span class="p">=</span> 
+
+1<span class="n">x3</span> <span class="n">struct</span> <span class="n">array</span> <span class="n">with</span> <span class="n">fields</span><span class="p">:</span>
+    <span class="n">centers</span>
+    <span class="n">sub</span>
+</pre></div>
+
+
+<p>with a field <code>centers</code> for its clusters and a field
+<code>sub</code> for its children. When there are no children, this
+field is equal to the empty matrix</p>
+
+<div class="highlight"><pre><span class="o">&gt;</span> <span class="n">tree</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span>1<span class="p">).</span><span class="n">sub</span><span class="p">(</span>1<span class="p">).</span><span class="n">sub</span><span class="p">(</span>1<span class="p">).</span><span class="n">sub</span><span class="p">(</span>1<span class="p">)</span>
+
+<span class="nb">ans</span> <span class="p">=</span> 
+
+    <span class="n">centers</span><span class="p">:</span> <span class="p">[</span>2<span class="n">x3</span> <span class="n">int32</span><span class="p">]</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.hikm.elkan">Elkan</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>VLFeat supports two different implementations of k-means. While they
+produce identical output, the Elkan method is sometimes faster.
+The <code>method</code> parameters controls which method is used. Consider the case when <code>K=10</code> and our data is now 128 dimensional (e.g. SIFT descriptors):</p>
+
+<div class="highlight"><pre><span class="n">K</span><span class="p">=</span>10<span class="p">;</span>
+<span class="n">nleaves</span> <span class="p">=</span> 1000<span class="p">;</span>
+<span class="n">data</span> <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span>128<span class="p">,</span>10000<span class="p">)</span> <span class="o">*</span> 255<span class="p">);</span>
+<span class="n">tic</span><span class="p">;</span>
+<span class="p">[</span><span class="n">tree</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_hikmeans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">nleaves</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span> <span class="s">&#39;lloyd&#39;</span><span class="p">)</span> <span class="p">;</span> <span class="c">% default</span>
+<span class="n">t_lloyd</span> <span class="p">=</span> <span class="n">toc</span>
+<span class="n">tic</span><span class="p">;</span>
+<span class="p">[</span><span class="n">tree</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_hikmeans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">nleaves</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span> <span class="s">&#39;elkan&#39;</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">t_elkan</span> <span class="p">=</span> <span class="n">toc</span>
+
+<span class="n">t_lloyd</span> <span class="p">=</span>
+
+    8<span class="p">.</span>0743
+
+<span class="n">t_elkan</span> <span class="p">=</span>
+
+    3<span class="p">.</span>0427
+</pre></div>
+
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

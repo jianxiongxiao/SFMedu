@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - MISC - VL_KDTREEBUILD</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - MISC - VL_KDTREEBUILD
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_INTHIST.html">Prev</a></li><li><a href="VL_KDTREEQUERY.html">Next</a></li></ul><div class="documentation"><p>
+FOREST = <a href="VL_KDTREEBUILD.html">VL_KDTREEBUILD</a>(X) returns a structure FOREST containing
+the kd-tree indexing the data X. X is a M x N dimensional matrix
+of class DOUBLE or SINGLE with one data point per column. Use
+<a href="VL_KDTREEQUERY.html">VL_KDTREEQUERY</a>() to query the index.
+</p><p>
+VL_KDETREEBUILD() accepts the following options:
+</p><dl><dt>
+NumTrees
+<span class="defaults">[1]</span></dt><dd><p>
+Specifies the number of semi-randomized KD-trees to add to the
+forest. Multiple trees can be used to improve approximate
+nearest-neighbors searches with <a href="VL_KDTREEQUERY.html">VL_KDTREEQUERY</a>().
+</p></dd><dt>
+ThresholdMethod
+<span class="defaults">[MEDIAN]</span></dt><dd><p>
+Specifies the thresholding method used to split the data.  Two
+methods are supported: split around the median (MEDIAN) or split
+around the mean (MEAN).
+</p></dd><dt>
+Verbose
+</dt><dd><p>
+Increases the verbosity level (can be repeated).
+</p></dd></dl><p>
+The FOREST structure has the following fields:
+</p><dl><dt>
+FOREST.TREES
+</dt><dd><p>
+A structure array with one element per tree.
+</p></dd><dt>
+FOREST.DIMENSION
+</dt><dd><p>
+Dimensionality of the indexed data.
+</p></dd><dt>
+FOREST.NUMDATA
+</dt><dd><p>
+Number of indexed data points.
+</p></dd></dl><p>
+The TREE structure has the following fields:
+</p><dl><dt>
+TREE.NODES
+</dt><dd><p>
+A structure array representing the nodes of the tree.
+</p></dd><dt>
+TREE.DATAINDEX
+</dt><dd><p>
+A 1 x NUMDATA vector of class UINT32 representing a permutation
+of the data.
+</p></dd></dl><p>
+Nodes are numbered from 1 to NUMNODES.  The NODES structure array
+has the following fields:
+</p><dl><dt>
+NODES.LOWERCHILD and NODES.UPPERCHILD
+</dt><dd><p>
+1 x NUMNODES vectors of class INT32. A positive value is the
+index of the lower/upper child node. A negative value denotes a
+leaf and is (after negation) is the first or last element plus
+one of a range of entries in the permutation TREE.DATAINDEX.
+Such entries are in turn indexes of the data points that belong
+to that leaf. Typically there is one point per leaf.
+</p></dd><dt>
+NODES.SPLITDIMENSION and NODES.SPLITTHRESHOLD
+</dt><dd><p>
+1 x NUMNODES vector of class UINT32 and DOUBLE, respectively,
+with the index of the splitting dimension and the threshold for
+each node.
+</p></dd></dl><p>
+See also: <a href="VL_KDTREEQUERY.html">VL_KDTREEQUERY</a>(), <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

@@ -1,0 +1,52 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:plotop.vl_plotstyle;'>Prev</a></li><li><a href='%pathto:plotop.vl_printsize;'>Next</a></li></ul><div class="documentation"><p>
+[RECALL, PRECISION] = <a href="%pathto:plotop.vl_pr;">VL_PR</a>(LABELS, SCORES) computes the
+precision-recall (PR) curve. LABELS are the ground thruth labels
+(+1 or -1) and SCORES are the scores associated to them by a
+classifier (lager scores correspond to positive guesses).
+</p><p>
+RECALL and PRECISION are the recall and the precision for
+increasing values of the decision threshold.
+</p><p>
+Set the zero the lables of data points to ignore in the evaluation.
+</p><p>
+Set to -INF the score of data points which are never retrieved. In
+this case the PR curve will have maximum recall &lt; 1.
+</p><p>
+<a href="%pathto:plotop.vl_pr;">VL_PR</a>() accepts the following options:
+</p><dl><dt>
+InludeInf
+<span class="defaults">[false]</span></dt><dd><p>
+If set to true, data with -INF score is included in the
+evaluation and the maximum recall is 1 even if -INF scores are
+present.
+</p></dd><dt>
+Stable
+<span class="defaults">[false]</span></dt><dd><p>
+If set to true, RECALL and PRECISION are in the samre order of
+LABELS and SCORES rather than being sorted by increasing
+RECALL. This option implies INCLUDEINF.
+</p></dd><dt>
+About the PR curve
+</dt><dd><p>
+This section uses the same symbols used in the documentation of
+the <a href="%pathto:plotop.vl_roc;">VL_ROC</a>() function. In addition to those quantities, define:
+</p><pre>
+  PRECISION(S) = TP(S) / (TP(S) + FP(S))
+  RECALL(S) = TP(S) / P = TPR(S)
+</pre><p>
+The precision is the fraction of positivie predictions which are
+correct, and the recall is the fraction of positive labels that
+have been correctly classified (recalled). Notice that the
+recall is also equal to the true positive rate for the ROC curve
+(see <a href="%pathto:plotop.vl_roc;">VL_ROC</a>()).
+</p></dd><dt>
+Remark
+</dt><dd><p>
+Precision (P) is undefined for those values of the
+classifier threshold for which no example is classified as
+positive. Conventionally, a precision of P=1 is assigned to such
+cases.
+</p></dd></dl><p>
+See also: <a href="%pathto:plotop.vl_roc;">VL_ROC</a>(), <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

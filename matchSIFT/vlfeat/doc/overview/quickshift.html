@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - Quick shift</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - Quick shift
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html" class='active' >Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+      
+
+<p><b>Quick shift</b> is a mode seeking algorithm (like mean shift) which
+instead of iteratively shifting each point towards a local mean instead forms a tree of links to the nearest neighbor which increases the density. For a more in-depth description of the algorithm, see our
+<a shape="rect" href="../api/quickshift_8h.html">API reference for quick shift</a></p>
+
+<ul>
+ <li><a shape="rect" href="quickshift.html#tut.qs.superpixels">Using quick shift to find superpixels</a></li>
+ <li><a shape="rect" href="quickshift.html#tut.qs.multi">Multiple segmentations</a></li>
+</ul>
+ 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.qs.superpixels">Using quick shift to find superpixels</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>This demo shows quick shift in a simple superpixelization problem where we seek to segment this image:</p>
+
+<div class="figure">
+  <image src="../demo/quickshift_image.jpg"></image>
+  <div class="caption">The image we wish to segment</div>
+</div>
+
+<p>As a feature vector, we choose the LAB colorspace representation of the image augmented with the x,y location of the pixel. <code>vl_quickseg</code> is a convenient wrapper function which takes care of the transformation of the image to LAB and performs segmentation, making our job as easy as:</p>
+
+<div class="highlight"><pre><span class="n">ratio</span> <span class="p">=</span> 0<span class="p">.</span>5<span class="p">;</span>
+<span class="n">kernelsize</span> <span class="p">=</span> 2<span class="p">;</span>
+<span class="n">Iseg</span> <span class="p">=</span> <span class="n">vl_quickseg</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">kernelsize</span><span class="p">,</span> <span class="n">maxdist</span><span class="p">);</span>
+</pre></div>
+
+
+<p>where <code>ratio</code> is the tradeoff between color importance and spatial importance (larger values give more importance to color), <code>kernelsize</code> is the size of the kernel used to estimate the density, and <code>maxdist</code> is the maximum distance between points in the feature space that may be linked if the density is increased.</p>
+
+<div class="figure">
+<image src="../demo/quickshift_qseg_1.jpg"></image>
+<image src="../demo/quickshift_qseg_2.jpg"></image>
+<div class="caption">The effect of <code>maxdist</code> on the superpixelization. As we increase <code>maxdist</code>, superpixels become larger and larger since we can link less similar points. Top: <code>maxdist=10</code>. Bottom: <code>maxdist=20</code>.</div>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.qs.multi">Multiple segmentations</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>Quick shift arranges all of the data points into a tree where parents in the tree are the nearest neighbors in the feature space which increase the estimate of the density. By imposing a limit on the distance between nearest neighbors (<code>maxdist</code>), we decrease the amount of computation required to search for the nearest neighbors. However, we also break our tree into a forest, because local modes of the density will now have no neighbor which is close enough in the feature space to form a link.</p>
+
+<p>In the previous section, we created a superpixel segmentation by taking each of the trees in this forest as a distinct cluster. However, since <code>maxdist</code> simply prevents new links from forming, the segmentation formed by every <code>dist &lt; maxdist</code> is contained in the result. <code>vl_quickvis</code> lets us visualize this by running quick shift once and forming multiple segmentations by cutting links in the tree which are smaller and smaller.</p>
+
+<div class="highlight"><pre><span class="n">maxdist</span> <span class="p">=</span> 50<span class="p">;</span>
+<span class="n">ndists</span> <span class="p">=</span> 10<span class="p">;</span>
+<span class="n">Iedge</span> <span class="p">=</span> <span class="n">vl_quickvis</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">kernelsize</span><span class="p">,</span> <span class="n">maxdist</span><span class="p">,</span> <span class="n">ndists</span><span class="p">)</span>
+<span class="n">imagesc</span><span class="p">(</span><span class="n">Iedge</span><span class="p">);</span>
+<span class="n">axis</span> <span class="n">equal</span> <span class="n">off</span> <span class="n">tight</span><span class="p">;</span>
+<span class="n">colormap</span> <span class="n">gray</span><span class="p">;</span>
+</pre></div>
+
+
+<div class="figure">
+<image src="../demo/quickshift_qvis.jpg"></image>
+<div class="caption">A visualization of multiple <code>maxdist</code> thresholds on a single image. Here, boundaries are colored by the largest <code>maxdist</code> where the boundary is preserved.</div>
+</div>
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

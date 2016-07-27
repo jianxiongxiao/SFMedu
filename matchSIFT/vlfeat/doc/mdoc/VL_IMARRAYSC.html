@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - IMOP - VL_IMARRAYSC</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - IMOP - VL_IMARRAYSC
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_IMARRAY.html">Prev</a></li><li><a href="VL_IMDISTTF.html">Next</a></li></ul><div class="documentation"><p>
+J=<a href="VL_IMARRAYSC.html">VL_IMARRAYSC</a>(A) constructs an image mosaic similar to
+J=<a href="VL_IMARRAY.html">VL_IMARRAY</a>(A), but it rescales the range of each image in the
+array. If A is an array of grayscale images, J will index all the
+colors in the current colormap; if A is a true color image, J will
+span the range [0,1].
+</p><p>
+If A is of an integer class, J will be of class single SINGLE class.
+</p><p>
+<a href="VL_IMARRAYSC.html">VL_IMARRAYSC</a>(...) displays the image J rather than returning it.
+</p><p>
+<a href="VL_IMARRAYSC.html">VL_IMARRAYSC</a>() accepts the options of <a href="VL_IMARRAY.html">VL_IMARRAY</a>() and:
+</p><dl><dt>
+CLim
+<span class="defaults">[]</span></dt><dd><p>
+Rescale the specified range of values rather than the actual
+range of each image.
+</p></dd><dt>
+Uniform
+<span class="defaults">[false]</span></dt><dd><p>
+Rescale the range of all the images together, rather than on
+an image-by-image basis.
+</p></dd><dt>
+CMap
+<span class="defaults">[]</span></dt><dd><p>
+Use the specified color map as a reference rather than the
+current or default one.
+</p></dd><dt>
+Algorithm
+</dt><dd><p>
+CLim is seet to the image range [m, M], where m is the minimum
+value of an image and M is the maximum. The image range CLim is
+then affinely mapped to the integers from 1 to C, where C is the
+number of colors in the colormap, or to the range [0,1] for true
+color images. The mapping is done so that the first color is
+assigned the first subinterval of length C of the range [m,M]
+and so on.
+</p></dd></dl><p>
+See also: <a href="VL_IMARRAY.html">VL_IMARRAY</a>(), <a href="VL_HELP.html">VL_HELP</a>(), IMAGE().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

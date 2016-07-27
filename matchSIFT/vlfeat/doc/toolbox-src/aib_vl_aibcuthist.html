@@ -1,0 +1,20 @@
+<group>
+<ul class='breadcrumb'><li><a href='%pathto:mdoc;'>Index</a></li><li><a href='%pathto:aib.vl_aibcut;'>Prev</a></li><li><a href='%pathto:aib.vl_aibcutpush;'>Next</a></li></ul><div class="documentation"><p>
+HIST = <a href="%pathto:aib.vl_aibcuthist;">VL_AIBCUTHIST</a>(MAP, X) computes the histogram of the data X over
+the specified VL_AIB cut MAP (as returned by <a href="%pathto:aib.vl_aibcut;">VL_AIBCUT</a>()).  Each element
+of HIST counts how many elements of X are projected in the
+corresponding cut node.
+</p><p>
+Data are mapped to bins as specified by <a href="%pathto:aib.vl_aibcutpush;">VL_AIBCUTPUSH</a>(). Data mapped
+to the null node are dropped.
+</p><p>
+<a href="%pathto:aib.vl_aibcuthist;">VL_AIBCUTHIST</a>() accepts the following options:
+</p><dl><dt>
+Nulls
+<span class="defaults">[drop]</span></dt><dd><p>
+What to do of null nodes: drop ('drop'), accumulate to an
+extra bin at the end of HIST ('append'), or accumulate to
+the first bin ('first')
+</p></dd></dl><p>
+See also: <a href="%pathto:aib.vl_aib;">VL_AIB</a>(), <a href="%pathto:vl_help;">VL_HELP</a>().
+</p></div></group>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - Utils</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - Utils
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html">MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html" class='active' >Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+     
+
+<p>This is a list of other notable MATLAB functions included in <b>VLFeat</b></p>
+
+<ul>
+<li><code>vl_imsmooth</code> smoothes an image by a Gaussian kernel
+  (simple but very useful as it is generally much faster than MATLAB's
+  general purpose smoothing functions).</li>
+
+<li><code>vl_plotframe</code> plots a variety of feature frame types (such as oriented ellipses).</li>
+
+<li><code>vl_binsum</code> performs binned summations, useful as a
+  building block for the fast computation of
+  histograms. <code>vl_whistc</code> computes weighed histograms.</li>
+<li><code>vl_imarray</code> and <code>vl_imarraysc</code> arrange and visualize multiple
+images in a grid</li>
+<li><code>vl_imsc</code> scales the image range;</li>
+<li><code>vl_tightsubplot</code> is similar to built-in
+<code>subplot</code>, but produces narrower margins.</li>
+
+<li><code>vl_cf</code> makes a copy of a figure.</li>
+
+<li><code>vl_rodr</code> and <code>vl_irodr</code> compute the Rodrigues' formula and
+  its inverse</li>
+
+<li><code>vl_override</code> overrides members of a structure with members of
+  another structure.</li>
+
+<li><code>vl_imwbackward</code> warps an image by the inverse mapping method
+  (generally much faster than MATLAB general purpose warping
+  functions).</li>
+
+<li><code>vl_waffine</code> computes the affine warp of a set of
+  points. <code>vl_tps</code>, <code>vl_tpsu</code>, <code>vl_wtps</code>
+  compute the thin-plate spline warp of a set of points. <code>vl_witps</code>
+  computes the inverse thin plate warp of a set of point (by
+  numerically inverting the transformation). They may be used in
+  combination with <code>vl_imwbackward</code>.</li>
+
+<li><code>vl_xyz2lab</code>, 
+  <code>vl_xyz2luv</code>, <code>vl_xyz2rgb</code>, <code>vl_rgb2xyz</code>
+  convert color spaces.</li>
+
+<li><code>vl_rcos</code>, <code>vl_gaussian</code>, <code>vl_dgaussian</code>,
+<code>vl_ddgaussian</code>
+compute some useful special functions.</li>
+
+</ul>
+
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

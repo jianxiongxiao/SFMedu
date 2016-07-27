@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Tutorials - MSER</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Tutorials - MSER
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+</li>
+<li><a href="tut.html">Tutorials</a>
+<ul>
+<li><a href="sift.html">SIFT</a>
+</li>
+<li><a href="dsift.html">DSIFT/PHOW</a>
+</li>
+<li><a href="mser.html" class='active' >MSER</a>
+</li>
+<li><a href="ikm.html">IKM</a>
+</li>
+<li><a href="hikm.html">HIKM</a>
+</li>
+<li><a href="aib.html">AIB</a>
+</li>
+<li><a href="quickshift.html">Quick shift</a>
+</li>
+<li><a href="slic.html">SLIC</a>
+</li>
+<li><a href="kdtree.html">kd-tree</a>
+</li>
+<li><a href="imdisttf.html">Distance transf.</a>
+</li>
+<li><a href="utils.html">Utils</a>
+</li>
+</ul></li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+     
+
+<p><em>Maximally Stable Extremal Regions (MSER)</em> is a feature
+detector; Like the <a shape="rect" href="tut.sift">SIFT detector</a>, the
+MSER algorithm extracts from an image <code>I</code> a number of
+co-variant regions, called MSERs. An MSER is a <em>stable</em>
+connected component of some level sets of the
+image <code>I</code>. Optionally, elliptical frames are attached to
+the MSERs by fitting ellipses to the regions. For a more in-depth explanation
+of the MSER detector, see our <a shape="rect" href="../api/mser_8h.html">API reference for MSER</a></p>
+
+<ul>
+<li><a shape="rect" href="mser.html#tut.mser.extract">Extracting MSERs</a></li>
+<li><a shape="rect" href="mser.html#tut.mser.param">MSER parameters</a></li>
+<li><a shape="rect" href="mser.html#tut.mser.conventions">Conventions</a></li>
+</ul>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.mser.extract">Extracting MSERs</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>Each MSERs can be identified uniquely by (at least) one of its
+pixels <code>x</code>, as the connected component of the level set at
+level <code>I(x)</code> which contains <code>x</code>. Such a pixel is
+called <em>seed</em> of the region.</p>
+
+<p>To demonstrate the usage of the MATLAB command <code>vl_mser</code>
+we open MATLAB and load a test image</p>
+
+<div class="highlight"><pre><span class="n">pfx</span> <span class="p">=</span> <span class="n">fullfile</span><span class="p">(</span><span class="n">vl_root</span><span class="p">,</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;spots.jpg&#39;</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">I</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">pfx</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">image</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">;</span> 
+</pre></div>
+
+
+<div class="figure">
+<image src="../demo/mser_basic_0.jpg"></image>
+<div class="caption">
+<span class="content">
+A test image.
+</span>
+</div>
+</div>
+
+<p>We then convert the image to a format that is suitable for the
+<code>vl_mser</code> command.</p>
+
+<div class="highlight"><pre><span class="n">I</span> <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">I</span><span class="p">))</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>We compute the region seeds and the elliptical frames by</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">f</span><span class="p">]</span> <span class="p">=</span> <span class="n">vl_mser</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="s">&#39;MinDiversity&#39;</span><span class="p">,</span>0<span class="p">.</span>7<span class="p">,...</span>
+                <span class="s">&#39;MaxVariation&#39;</span><span class="p">,</span>0<span class="p">.</span>2<span class="p">,...</span>
+                <span class="s">&#39;Delta&#39;</span><span class="p">,</span>10<span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>We plot the region frames by</p>
+
+<div class="highlight"><pre><span class="n">f</span> <span class="p">=</span> <span class="n">vl_ertr</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">vl_plotframe</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<p><code>vl_ertr</code> transposes the elliptical frame and is
+required here because the <code>vl_mser</code> code assumes that the row index
+is the first index, but the normal image convention assumes that this is the
+<code>x</code> (column) index.</p>
+
+<p>Plotting the MSERs themselves is a bit more involved as they have
+arbitrary shape.  To this end, we exploit two
+functions: <code>vl_erfill</code>, which, given an image and a region
+seed, returns a list of the pixels belonging to that region, and
+the MATLAB built-in <code>contour</code>, which draws the contour lines
+of a function. We start by</p>
+
+<div class="highlight"><pre><span class="n">M</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">I</span><span class="p">))</span> <span class="p">;</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">=</span><span class="n">r</span><span class="o">&#39;</span>
+ <span class="n">s</span> <span class="p">=</span> <span class="n">vl_erfill</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="p">;</span>
+ <span class="n">M</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">=</span> <span class="n">M</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> 1<span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>which computes a matrix <code>M</code> whose value are equal to the
+number of overlapping extremal regions. Next, we use <code>M</code>
+and <code>contour</code> to display the region boundaries:</p>
+
+<div class="highlight"><pre><span class="n">figure</span><span class="p">(</span>2<span class="p">)</span> <span class="p">;</span>
+<span class="n">clf</span> <span class="p">;</span> <span class="n">imagesc</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">;</span> <span class="n">hold</span> <span class="n">on</span> <span class="p">;</span> <span class="n">axis</span> <span class="n">equal</span> <span class="n">off</span><span class="p">;</span> <span class="n">colormap</span> <span class="n">gray</span> <span class="p">;</span>
+<span class="p">[</span><span class="n">c</span><span class="p">,</span><span class="n">h</span><span class="p">]=</span><span class="n">contour</span><span class="p">(</span><span class="n">M</span><span class="p">,(</span>0<span class="p">:</span><span class="n">max</span><span class="p">(</span><span class="n">M</span><span class="p">(:)))</span><span class="o">+</span><span class="p">.</span>5<span class="p">)</span> <span class="p">;</span>
+<span class="n">set</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="s">&#39;color&#39;</span><span class="p">,</span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="s">&#39;linewidth&#39;</span><span class="p">,</span>3<span class="p">)</span> <span class="p">;</span>
+</pre></div>
+
+
+<div class="figure">
+<image src="../demo/mser_basic_contours.jpg"></image>
+<image src="../demo/mser_basic_frames.jpg"></image>
+<div class="caption">
+<span class="content">
+Extracted MSERs (left) and fitted ellipses (right).
+</span>
+</div>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<h1 id="tut.mser.param">MSER parameters</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<p>In the original formulation, MSERs are controlled by a single
+parameter <code>&Delta;</code>, which controls how the stability is
+calculated. Its effect is shown in the figure below.</p>
+
+<div class="figure">
+<image src="../demo/mser_delta_0.jpg"></image>
+<image src="../demo/mser_delta_1.jpg"></image>
+<image src="../demo/mser_delta_2.jpg"></image>
+<image src="../demo/mser_delta_3.jpg"></image>
+<image src="../demo/mser_delta_4.jpg"></image>
+<div class="caption">
+<span class="content">
+  <b>Effect of <code>&Delta;</code>.</b> We start with a synthetic
+  image which has an intensity profile as shown.  The bumps have
+  heights equal to 32, 64, 96, 128 and 160. As we increase
+  <code>&Delta;</code>, fewer and fewer regions are detected until
+  finally at <code>&Delta;=160</code> there is no region
+  <code>R</code> which is stable at <code>R(+&Delta;)</code>.
+</span>
+</div>
+</div>
+
+<p>The stability of an extremal region <code>R</code> is the inverse
+of the relative area variation of the region <code>R</code> when the
+intensity level is increased by <code>&Delta;</code>. Formally, the
+variation is defined as:</p>
+
+
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 

@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <meta>
+  <!-- Stylesheets -->
+  <link href="../web.css" type="text/css" rel="stylesheet"></link>
+  <link href="../pygmentize.css" type="text/css" rel="stylesheet"></link>
+  <title>VLFeat - Documentation - Matlab API - MSER - VL_MSER</title>
+  
+
+  <!-- Scripts-->
+  
+ </meta>
+
+ <!-- Body Start -->
+ <body>
+  <div id="header">
+   <!-- Google CSE Search Box Begins -->
+   <form action="http://www.vlfeat.org/search.html" method="get" id="cse-search-box" enctype="application/x-www-form-urlencoded">
+    <div>
+     <input type="hidden" name="cx" value="003215582122030917471:oq23albfeam"></input>
+     <input type="hidden" name="cof" value="FORID:11"></input>
+     <input type="hidden" name="ie" value="UTF-8"></input>
+     <input type="text" name="q" size="31"></input>
+     <input type="submit" name="sa" value="Search"></input>
+    </div>
+   </form>
+   <script src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" xml:space="preserve" type="text/javascript"></script>
+   <!-- Google CSE Search Box Ends -->
+   <h1><a shape="rect" href="../index.html" class="plain"><span id="vlfeat">VLFeat</span><span id="dotorg">.org</span></a></h1>
+  </div>
+  <div id="headbanner">
+   Documentation - Matlab API - MSER - VL_MSER
+  </div>
+  <div id="pagebody">
+   <div id="sidebar"> <!-- Navigation Start -->
+    <ul>
+<li><a href="../index.html">Home</a>
+</li>
+<li><a href="../download.html">Download</a>
+</li>
+<li><a href="../doc.html">Documentation</a>
+<ul>
+<li><a href="mdoc.html">Matlab API</a>
+</li>
+<li><a href="../api/index.html">C API</a>
+</li>
+<li><a href="../man/man.html">Man pages</a>
+</li>
+</ul></li>
+<li><a href="../overview/tut.html">Tutorials</a>
+</li>
+<li><a href="../applications/apps.html">Applications</a>
+</li>
+</ul>
+
+   </div> <!-- sidebar -->
+   <div id="content">
+    <div class="mdoc">
+<ul class="breadcrumb"><li><a href="mdoc.html">Index</a></li><li><a href="VL_ERTR.html">Prev</a></li><li><a href="VL_CF.html">Next</a></li></ul><div class="documentation"><p>
+R=<a href="VL_MSER.html">VL_MSER</a>(I) computes the Maximally Stable Extremal Regions (MSER)
+[1] of image I with stability threshold DELTA. I is any array of
+class UINT8. R is a vector of region seeds.
+</p><p>
+A (maximally stable) extremal region is just a connected component
+of one of the level sets of the image I.  An extremal region can
+be recovered from a seed X as the connected component of the level
+set {Y: I(Y) &lt;= I(X)} which contains the pixel o index X.
+</p><p>
+The function supports images of arbitrary dimension D.
+</p><p>
+[R,F]=<a href="VL_MSER.html">VL_MSER</a>(...) also returns ellipsoids F fitted to the regions.
+Each column of F describes an ellipsoid; F(1:D,i) is the center of
+the elliposid and F(D:end,i) are the independent elements of the
+co-variance matrix of the ellipsoid.
+</p><p>
+Ellipsoids are computed according to the same reference frame of I
+seen as a matrix. This means that the first coordinate spans the
+first dimension of I.
+</p><p>
+Notice that for 2-D images usually the opposite convention is used
+(i.e. the first coordinate is the x-axis, which corresponds to the
+column index). Thus, if the function <a href="VL_PLOTFRAME.html">VL_PLOTFRAME</a>() is used to plot
+the ellipses, the frames F should be `transposed' as in F = F([2
+1 5 4 3],:). <a href="VL_ERTR.html">VL_ERTR</a>() exists for this purpose.
+</p><p>
+<a href="VL_MSER.html">VL_MSER</a>(I,'Option'[,Value]...) accepts the following options
+</p><dl><dt>
+Delta
+<span class="defaults">[5]</span></dt><dd><p>
+Set the DELTA parameter of the VL_MSER algorithm. Roughly
+speaking, the stability of a region is the relative variation
+of the region area when the intensity is changed of +/-
+Delta/2.
+</p></dd><dt>
+MaxArea
+<span class="defaults">[0.75]</span></dt><dd><p>
+Set the maximum area (volume) of the regions relative to
+the image domain area (volume).
+</p></dd><dt>
+MinArea
+<span class="defaults">[3 / numPixels]</span></dt><dd><p>
+Set the minimum area (volume) of the regions relative to
+the image domain area (volume).
+</p></dd><dt>
+MaxVariation
+<span class="defaults">[0.25]</span></dt><dd><p>
+Set the maximum variation (absolute stability score) of the
+regions.
+</p></dd><dt>
+MinDiversity
+<span class="defaults">[0.2]</span></dt><dd><p>
+Set the minimum diversity of the region. When the relative
+area variation of two nested regions is below this threshold,
+then only the most stable one is selected.
+</p></dd><dt>
+BrightOnDark
+<span class="defaults">[1]</span></dt><dd><p>
+Detect bright-on-dark MSERs. This corresponds to MSERs of the
+inverted image.
+</p></dd><dt>
+DarkOnBright
+<span class="defaults">[1]</span></dt><dd><p>
+Detect dark-on-bright MSERs. This corresponds to MSERs of the
+original image.
+</p></dd><dt>
+Verbose
+</dt><dd><p>
+Be verbose.
+</p></dd><dt>
+REFERENCES
+</dt><dd><p>
+[1] J. Matas, O. Chum, M. Urban, and T. Pajdla, &quot;Robust wide
+baseline stereo from maximally stable extremal regions,&quot; in
+Proc. BMVC, 2002.
+</p></dd></dl><p>
+See also: <a href="VL_HELP.html">VL_HELP</a>().
+</p></div></div>
+   </div>
+   <div class="clear">&nbsp;</div>
+  </div> <!-- pagebody -->
+  <div id="footer">
+   &copy; 2007-12 Andrea Vedaldi and Brian Fulkerson
+  </div> <!-- footer -->
+
+  <!-- Google Analytics Begins -->
+  <script xml:space="preserve" type="text/javascript">
+   //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   }
+   //]]>
+  </script>
+  <script xml:space="preserve" type="text/javascript">
+    //<![CDATA[
+    var localre = /vlfeat.org/;
+    if(document.location.host.search(localre) != -1)
+    {
+
+   try {
+   var pageTracker = _gat._getTracker("UA-4936091-2");
+   pageTracker._trackPageview();
+   } catch(err) {}
+
+   }
+   //]]>
+  </script>
+  <!-- Google Analytics Ends -->
+ </body>
+</html>
+
+ 
