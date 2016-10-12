@@ -20,8 +20,8 @@ for i=1:4
         X(:,j) = vgg_X_from_xP_nonlin(reshape(pair.matches(:,j),2,2),P,repmat([frames.imsize(2);frames.imsize(1)],1,2));
     end
     X = X(1:3,:) ./ X([4 4 4],:);
-
-    dprd = Rt(3,1:3,i) * ((X(:,:) - repmat(Rt(1:3,4,i),1,size(X,2))));
+    
+    dprd = Rt(3,1:3,i) * X + Rt(3,4,i);
     goodCnt(i) = sum(X(3,:)>0 & dprd > 0);
 
 end
