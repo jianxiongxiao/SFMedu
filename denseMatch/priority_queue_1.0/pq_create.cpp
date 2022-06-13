@@ -49,6 +49,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]){
 	// convert the points to double
 	plhs[0] = mxCreateDoubleMatrix(1,1,mxREAL);
 	double* pointer_to_tree = mxGetPr(plhs[0]);
-	pointer_to_tree[0] = (long) pq;
+	pointer_to_tree[0] = (long long) pq;
 }
 #endif

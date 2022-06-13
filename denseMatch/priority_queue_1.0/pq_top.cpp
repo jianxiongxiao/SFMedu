@@ -28,7 +28,7 @@ void retrieve_heap( const mxArray* matptr, MaxHeap<double>* & heap){
     if( pointer0 == NULL )
         mexErrMsgTxt("vararg{1} must be a valid priority queue pointer\n");
     // convert it to "long" datatype (good for addresses)
-    long pointer1 = (long) pointer0[0];
+    long long pointer1 = (long long) pointer0[0];
     // convert it to "KDTree"
     heap = (MaxHeap<double>*) pointer1;
     // check that I actually received something
